@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
+    <script src="../api/Login.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="main-login">
+        <div class="left-login">
+            <h1>Automafour</h1>
+            <img src="../assets/spreadsheets-animate.svg" class="left-login-image">
+        </div>
+        <div class="right-login">
+            <div class="card-login">
+                <h1>LOGIN</h1>
+                <div class="textfield">
+                    <label for="nome">Usuário</label>
+                    <input type="text" name="nome" id="nome" placeholder="Usuário">
+                </div>
+                <div class="textfield">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" name="senha" placeholder="Senha">
+                </div>
+                <button class="btn-login" onclick="login(nome.value, senha.value)">Login</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

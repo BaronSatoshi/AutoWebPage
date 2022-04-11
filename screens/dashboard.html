@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" rel="stylesheet">
+    <script src="https://unpkg.com/axios@0.21.4/dist/axios.min.js"></script>
+    <script src="../api/dashboard.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container2">
+        
+        <aside>
+            <div class="top">
+                <div class="logo">
+                    <!-- <img src="../assets/LOGO-AUTOMAFOUR-tigre.png"> -->
+                    <h2>AUTOMA<span class="danger">FOUR</span></h2>
+                </div>
+                <div class="close" id="close-btn">
+                    <span class="material-icons-sharp">close</span>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <a href="#">
+                    <span class="material-icons-sharp">grid_view</span>
+                    <h3>Dashboard</h3>
+                </a>
+                <!-- <a href="#">
+                    <span class="material-icons-sharp">receipt_long</span>
+                    <h3>Orders</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">insights</span>
+                    <h3>Analytics</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">mail_outline</span>
+                    <h3>Messages</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">inventory</span>
+                    <h3>Products</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">report_gmailerrorred</span>
+                    <h3>Reports</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">settings</span>
+                    <h3>Settings</h3>
+                </a>
+                <a href="#">
+                    <span class="material-icons-sharp">add</span>
+                    <h3>Add Product</h3>
+                </a> -->
+                <a href="#" onclick="Redirect()">
+                    <span class="material-icons-sharp">logout</span>
+                    <h3>Logout</h3>
+                </a>
+            </div>
+        </aside>
+
+        <nav>
+            <div class="container">
+                
+                <div class="row1">
+                        
+                    <div class="col-9">
+                        <div class="nav justify-content-center nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link text-dark active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true" onclick="limpar()">Usuários</a>
+                            <a class="nav-item nav-link text-dark" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Cadastrar</a>
+                        </div>
+        
+                    </div>
+        
+                </div>
+        
+            </div>
+        
+            <!-- Fim Navegação -->
+        
+            <!-- Começo da Lista de Clientes -->
+            <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                
+                <div class="main">
+                    <div class="search">
+                        <label>
+                            <input type="text" id="search" placeholder="Pesquisar" >
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>
+
+                <div class="row" style="margin-top: 55px; color: white; padding-top: 20px;">
+
+                    <div class="col-2">
+        
+                        <div class="form-group">
+                            <p class="mb-0"> <strong>  Ean </strong> </p>
+                            <input type="text" id="ean" class="campo_busca" >
+                        </div>
+        
+                    </div>
+        
+                    <div class="col-2">
+        
+                        <div class="form-group">
+                            <p class="mb-0"> <strong> Descrição </strong> </p>
+                            <input type="text" id="desc" class="campo_busca">
+                        </div>
+        
+                    </div>
+                    
+                    <div class="col-2">
+        
+                        <div class="form-group">
+                            <p class="mb-0"> <strong> Ncm </strong> </p>
+                            <input type="text" id="ncm" class="campo_busca">
+                        </div>
+        
+                    </div>
+
+                    <div class="col-2">
+        
+                        <div class="form-group">
+                            <p class="mb-0"> <strong> Data  </strong> </p>
+                            <input type="date"  class="campo_busca" id="data" >
+                        </div>
+        
+                    </div>
+
+                    <div class="col-2">
+
+                        <div class="form-group">
+        
+                            <p class="mb-0"> <strong> Nº de páginas</strong> </p>
+                            <select class="campo_busca" id="npaginas" >
+                                <option selected value="10"> 10 </option>
+                                <option value="25"> 25 </option>
+                                <option value="50"> 50 </option>
+                                <option value="100"> 100 </option>
+                                <option value="150"> 150 </option>
+                            </select>
+
+                        </div>
+        
+                    </div>
+
+
+                    <div class="col-2">
+        
+                        <div class="form-group">
+                            <button class="btn btn-primary" style="margin-top: 15px;" onclick="Dados(npaginas.value, ncm.value,ean.value,desc.value,data.value)" >Buscar</button>
+                        </div>
+        
+                    </div>
+                    
+        
+                </div>
+                
+                <table class="content-table" id="Tabela">
+                    <thead>
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td><strong>DESCRIÇÃO</strong></td>
+                            <td><strong>EAN</strong></td>
+                            <td><strong>NCM</strong></td>
+                            <td style='justify-content: center; display: flex; left: 40px;' ><strong>AÇÃO</strong></td>
+                        </tr>
+                    </thead>
+                    <tbody id="MyTable" style="visibility: visible">
+                       
+                    </tbody>
+                </table>
+                    </div>
+                </div>
+                <!-- Fim Da Lista de Clientes -->
+                
+                <!-- Começo Cadastro de Usuarios e Permissões  -->
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        <div class="main2">
+                            <div class="Titulo">
+                                <h2 style="color: #00b18d;">Cadastro</h2>
+                            </div>
+                        <div class="container">
+                            
+                            <div class="row mt-3">
+
+                                
+                                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        
+                                        <p class="mb-0"> <strong> Descrição </strong> </p>
+                                        <input type="text" id="Descri"  class="campo_busca">
+                                        <input type="text" id="IDProduto" style="display: none;">
+
+                                    </div>
+                
+                                </div>
+                    
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> EAN </strong> </p>
+                                        <input type="text" id="Ean" class="campo_busca" >
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> NCM</strong> </p>
+                                        <input type="text" id="Ncm" class="campo_busca" >
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Exceção NCM </strong> </p>
+                                        <input type="text" id="ncmEx" class="campo_busca" >
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Cest </strong> </p>
+                                        <input type="text" id="Cest" class="campo_busca" >
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> CBenef </strong> </p>
+                                        <input type="text" id="Cbenef" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                            </div>
+                            <h4 style="display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; margin-top: 8px;">ICMS</h4>
+                            <div class="row mt-3">
+                                
+                                <div class="col-3">
+
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> CST </strong> </p>
+                                        <select class="campo_busca" id="csticms">
+                                            <option selected value=""></option>
+                                            <option value="0">00 - Tributada integralmente</option>
+                                            <option value="10">10 - Tributada e com cobrança do ICMS por substituiçãoo tributária</option>
+                                            <option value="20">20 - Com redução de base de cálculo</option>
+                                            <option value="30">30 - Isenta ou não tributada e com cobrança do ICMS por substituição tributária</option>
+                                            <option value="40">40 - Isenta</option>
+                                            <option value="41">41 - Não tributada</option>
+                                            <option value="50">50 - Suspensão</option>
+                                            <option value="51">51 - Diferimento</option>
+                                            <option value="60">60 - ICMS cobrado anteriormente por substituição tributária</option>
+                                            <option value="70">70 - Com redução de base de cálculo e cobrança do ICMS por substituição tributária</option>
+                                            <option value="90">90 - Outros</option>
+                                        </select>
+                                    </div>
+                
+                                </div>   
+                                
+                                <div class="col-3">
+
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> CSOSN </strong> </p>
+                                        <select class="campo_busca" id="csosn">
+                                            <option selected value=""></option>
+                                            <option value="101">101 - Tributada pelo Simples Nacional com permissão de crédito. (v.2.0)</option>
+                                            <option value="102">102 - Tributada pelo Simples Nacional sem permissão de crédito.</option>
+                                            <option value="103">103 - Isenção do ICMS no Simples Nacional para faixa de receita bruta.</option>
+                                            <option value="201">201 - Tributada pelo Simples Nacional com permissão de crédito e com cobrança do ICMS por Substituição Tributária</option>
+                                            <option value="202">202 - Tributada pelo Simples Nacional sem permissão de crédito e com cobrança do ICMS por Substituição Tributária</option>
+                                            <option value="203">203 - Isenção do ICMS nos Simples Nacional para faixa de receita bruta e com cobrança do ICMS por Substituição Tributária</option>
+                                            <option value="300">300 - Imune.</option>
+                                            <option value="400">400 - Não tributada pelo Simples Nacional (v.2.0)</option>
+                                            <option value="500">500 - ICMS cobrado anteriormente por substituição tributária (substituído) ou por antecipação</option>
+                                            <option value="900">900 - Outros</option>
+                                        </select>
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq ICMS </strong> </p>
+                                       <input type="text" id="aliqIcms" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Red. Base ICMS </strong> </p>
+                                        <input type="text" id="baseicms1" class="campo_busca">
+                                    </div>
+                
+                                </div>
+                
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> MVA Interna </strong> </p>
+                                        <input type="text" id="mvainterna" class="campo_busca">
+                                    </div>
+                
+                                </div>
+                            
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> MVA Ajustada </strong> </p>
+                                        <input type="text" id="mvaajustada" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq ICMS-ST </strong> </p>
+                                        <input type="text" id="aliqismsST" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Red. Base ICMS-ST </strong> </p>
+                                        <input type="text" id="baseicmsST" class="campo_busca">
+                                    </div>
+                
+                                </div>
+                            </div>
+                            <h4 style="display: flex; justify-content: center; align-items: center; font-size: 22px; font-weight: bold; margin-top: 8px;">PIS/COFINS</h4>
+                            <div class="row mt-3">                
+                                <div class="col-3">
+                
+                                   
+
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> CST Entrada </strong> </p>
+                                        <select class="campo_busca" id="CstPisCofinsEntrada">
+                                            <option selected value=""></option>
+                                            <option value="50">50 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                                            <option value="51">51 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                                            <option value="52">52 - Operação com Direito a Crédito - Vinculada Exclusivamente a Receita de Exportação</option>
+                                            <option value="53">53 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                                            <option value="54">54 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas no Mercado Interno e de Exportação </option>
+                                            <option value="55">55 - Operação com Direito a Crédito - Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="56">56 - Operação com Direito a Crédito - Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                                            <option value="60">60 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Tributada no Mercado Interno</option>
+                                            <option value="61">61 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita Não Tributada no Mercado Interno</option>
+                                            <option value="62">62 - Crédito Presumido - Operação de Aquisição Vinculada Exclusivamente a Receita de Exportação</option>
+                                            <option value="63">63 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno</option>
+                                            <option value="64">64 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="65">65 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Não-Tributadas no Mercado Interno e de Exportação</option>
+                                            <option value="66">66 - Crédito Presumido - Operação de Aquisição Vinculada a Receitas Tributadas e Não-Tributadas no Mercado Interno, e de Exportação</option>
+                                            <option value="67">67 - Crédito Presumido - Outras Operações</option>
+                                            <option value="70">70 - Operação de Aquisição sem Direito a Crédito</option>
+                                            <option value="71">71 - Operação de Aquisição com Isenção</option>
+                                            <option value="72">72 - Operação de Aquisição com Suspensão</option>
+                                            <option value="73">73 - Operação de Aquisição a Alíquota Zero</option>
+                                            <option value="74">74 - Operação de Aquisição sem Incidência da Contribuição</option>
+                                            <option value="75">75 - Operação de Aquisição por Substituição Tributária</option>
+                                            <option value="98">98 - Outras Operações de Entrada</option>
+                                            <option value="99">99 - Outras Operações</option>
+                                        </select>
+                                    </div>
+                
+                                </div>
+                                
+                                <div class="col-3">
+
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> CST Saida </strong> </p>
+                                        <select class="campo_busca" id="CstPisCofinsSaida">
+                                            <option selected value=""></option>
+                                            <option value="1">01 - Operação Tributável com Aliquota Básica (base de cálculo = valor da operação alíquota normal (cumulativo/não cumulativo))</option>
+                                            <option value="2">02 - Operação Tributável com Alíquota Diferenciada (base de cálculo = valor da operação (alíquota diferenciada))</option>
+                                            <option value="3">03 - Operação Tributável com Alíquota por Unidade de Medida de Produto (base de cálculo = quantidade vendida x alíquota por unidade de produto)</option>
+                                            <option value="4">04 - Operação Tributável(tributação monofásica (alíquota zero))</option>
+                                            <option value="5">05 - Operação Tributável por Substituição Tributária</option>
+                                            <option value="6">06 - Operação Tributável (alíquota zero)</option>
+                                            <option value="7">07 - Operação Isenta da Contribuição</option>
+                                            <option value="8">08 - Operação Sem Incidência da Contribuição</option>
+                                            <option value="9">09 - Operação com Suspensão da Contribuição</option>
+                                            <option value="49">49 - Outras Operações de Saída</option>
+                                        </select>
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Tipo Credito </strong> </p>
+                                        <input type="text" id="tipocredito" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Natureza Receita </strong> </p>
+                                        <input type="text" id="naturezaReceita" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq Pis Cumulativo </strong> </p>
+                                        <input type="text" id="AliqPisCumulativo" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq Cofins Cumulativo </strong> </p>
+                                        <input type="text" id="AliqCofinsCumulativo" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq Pis Não Cumulativo </strong> </p>
+                                        <input type="text" id="AliqPisNaoCumulativo" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                                <div class="col-3">
+                
+                                    <div class="form-group">
+                                        <p class="mb-0"> <strong> Aliq Cofins Não Cumulativo </strong> </p>
+                                        <input type="text" id="AliqCofinsNaoCumulativo" class="campo_busca">
+                                    </div>
+                
+                                </div>
+
+                               
+                            </div>
+                        </div>
+                        <div class="footer-btn">    
+                            <button type="button" class="addBtn" id="SaveBTN" onclick="Register(IDProduto.value,Descri.value,Ean.value,Ncm.value,ncmEx.value,Cest.value,csticms.value,Cbenef.value,csosn.value,aliqIcms.value,mvainterna.value,mvaajustada.value,CstPisCofinsEntrada.value,tipocredito.value,CstPisCofinsSaida.value,naturezaReceita.value,AliqPisCumulativo.value,AliqCofinsCumulativo.value,AliqPisNaoCumulativo.value,AliqCofinsNaoCumulativo.value,baseicms1.value,baseicmsST.value,aliqismsST.value)">Gravar</button>
+                            <button type="button" class="removeBtn" onclick="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </nav>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        $(document).ready(() => {
+            //Função de pesquisa dinâmica
+            $('#search').keyup(function() {
+            var nomeFiltro = $(this).val().toLowerCase();
+            // console.log(nomeFiltro)
+            $('table tbody ').find('tr').each(function() {
+                var conteudoCelula = $(this).find('td').text();
+                var corresponde = conteudoCelula.toLowerCase().indexOf(nomeFiltro) >= 0;
+                $(this).css('display', corresponde ? '' : 'none');
+            });
+            });
+        })
+
+        // const dataAtual = new Date()
+
+        // const dataFormatada = dataAtual.toLocaleDateString(
+        //     'en-US',
+        //     {
+        //         day: '2-digit',
+        //         month: '2-digit',
+        //         year: 'numeric'
+        //     }
+        // )
+
+        // console.log(dataFormatada)
+
+        function Redirect(){
+            location.href="index.html"
+        }
+
+        var usuarioLogado = sessionStorage.getItem('usuarioLogado')
+        // verificação para sabar se o usuario está logado, senão ele irá ser redirecionado para a tela de login
+        if(!usuarioLogado){
+            location.href='index.html'
+        }
+
+        function OpenVisu(codigo){
+            console.log(codigo)
+            
+           BuscaOne(codigo)
+            document.getElementById('nav-profile-tab').click();
+        }
+
+        function limpar() {
+                document.getElementById('IDProduto').value = '';
+                document.getElementById('Descri').value = '';                   
+                document.getElementById('Ean').value = '';
+                document.getElementById('Ncm').value = '';
+                document.getElementById('ncmEx').value = '';
+                document.getElementById('Cest').value = '';
+                document.getElementById('csticms').value = '';
+                document.getElementById('Cbenef').value = '';
+                document.getElementById('csosn').value = '';
+                document.getElementById('aliqIcms').value = '';
+                document.getElementById('mvainterna').value = '';
+                document.getElementById('mvaajustada').value = '';
+                document.getElementById('CstPisCofinsEntrada').value = '';
+                document.getElementById('tipocredito').value = '';
+                document.getElementById('CstPisCofinsSaida').value = '';
+                document.getElementById('naturezaReceita').value = '';
+                document.getElementById('AliqPisCumulativo').value = '';
+                document.getElementById('AliqCofinsCumulativo').value = '';
+                document.getElementById('AliqPisNaoCumulativo').value = '';
+                document.getElementById('AliqCofinsNaoCumulativo').value = '';
+                document.getElementById('baseicms1').value = '';
+                document.getElementById('baseicmsST').value = '';
+                document.getElementById('aliqismsST').value = '';
+                document.getElementById('ean').value = '';
+                document.getElementById('desc').value = '';
+                document.getElementById('ncm').value = '';
+                document.getElementById('data').value = '';
+        
+        }
+
+        function cancel(){
+            document.getElementById('nav-home-tab').click();
+            limpar()
+        }
+
+        document.getElementById('aliqIcms').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+
+        document.getElementById('mvainterna').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+
+        document.getElementById('mvaajustada').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+
+        document.getElementById('baseicms1').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+
+        document.getElementById('baseicmsST').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+
+        document.getElementById('aliqismsST').onkeypress = function(e) {
+		var chr = String.fromCharCode(e.which);
+		if ('1234567890'.indexOf(chr) < 0)
+		return false;
+	    };
+    </script>
+</body>
+</html>
